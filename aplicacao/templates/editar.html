@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {{ tarefas.titulo}}
+    <form action="{% url 'update' tarefas.id %}" method="POST">
+        {% csrf_token %}
+        <p>Titulo:</p>
+        <input type="text" name="titulo" value="{{tarefas.titulo}}">
+        <p>Descricao:</p>
+        <input type="textarea" name="descricao" value="{{tarefas.descricao}}">
+        <button type="submit">Salvar Alterações</button>
+    </form>
+</body>
+</html>

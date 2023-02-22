@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefas</title>
+</head>
+<body>
+    <h3>Tarefas</h3>
+    <table border="1" >
+        <thead>
+            <tr>
+                <th>TAREFA</th>
+                <th>STATUS</th>
+                <th>CRUD</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tarefa in tarefas %}
+            <tr>
+                <td>{{ tarefa.titulo }}</td>
+                
+                {% if tarefa.status == True %}
+                    <td>Concluida</td>
+                {% else %}
+                    <td>Não Concluida</td>
+                {% endif %}
+                
+                <td>
+                    <a href="{% url 'detalhes' tarefa.id %}">Ver Mais</a>
+                    <a href="{% url 'editar' tarefa.id %}">Editar</a>
+                    <a href="{% url 'delete' tarefa.id %}">Deletar</a>
+
+                    <form action="{% url 'status' tarefa.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="Concluir">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'novatarefa' %}">Nova Tarefa</a>
+</body>
+</html>
